@@ -220,10 +220,24 @@ function onRenderNotification()
 				draw_list:AddRectFilled(imgui.ImVec2(p.x - imgui.GetStyle().WindowPadding.x + 205, p.y - imgui.GetStyle().WindowPadding.y), imgui.ImVec2(p.x + 216, p.y + notfList.size.y + imgui.GetStyle().ItemSpacing.y + imgui.GetStyle().WindowPadding.y), style.rightBox);
 
 				imgui.PushTextWrapPos(196.0)
-				if style.text and type(style.text) == "userdata" then
-    imgui.TextColored(style.text, nText)
-else
-    imgui.Text(nText)
+for line in nText:gmatch("[^\n]+") do
+    local center = false
+    if line:find("^%[C%]") then
+        center = true
+        line = line:gsub("^%[C%]", "") -- убираем метку
+    end
+
+    local textSize = imgui.CalcTextSize(line)
+    if center then
+        local winWidth = imgui.GetWindowWidth()
+        imgui.SetCursorPosX((winWidth - textSize.x) / 2)
+    end
+
+    if style.text and type(style.text) == "userdata" then
+        imgui.TextColored(style.text, line)
+    else
+        imgui.Text(line)
+    end
 end
 				imgui.PopTextWrapPos()
 
