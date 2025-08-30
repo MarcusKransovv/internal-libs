@@ -202,7 +202,8 @@ function main()
         files = {
             {name = 'imgui.lua', link = "https://www.blast.hk/moonloader/files/misc/moon-imgui-1.1.5.zip"},
             {name = 'encoding.lua', link = "https://github.com/MarcusKransovv/internal-libs/raw/refs/heads/main/encoding.lua"},
-            {name = 'iconv.dll', link = "https://github.com/MarcusKransovv/internal-libs/raw/refs/heads/main/iconv.dll"}
+            {name = 'iconv.dll', link = "https://github.com/MarcusKransovv/internal-libs/raw/refs/heads/main/iconv.dll"},
+            {name = 'inicfg.lua', link = "https://github.com/MarcusKransovv/internal-libs/raw/refs/heads/main/inicfg.lua"}
         }
     },
     libs2 = {
@@ -1929,7 +1930,7 @@ function loadLib(lib_data)
     for i, file in ipairs(lib_data.files) do
         local filePath = loadPath .. file.name
         if doesFileExist(filePath) then
-            print('[loadLib] Найден: ' .. file.name)
+            --print('[loadLib] Найден: ' .. file.name)
             exists = exists + 1
         else
             print('[loadLib] Отсутствует: ' .. file.name)
